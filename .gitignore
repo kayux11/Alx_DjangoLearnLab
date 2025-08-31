@@ -1,0 +1,50 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Django database (SQLite)
+db.sqlite3
+
+# Logs
+*.log
+
+# Media files (user uploads)
+LibraryProject/media/
+
+# Static files (collected via collectstatic)
+LibraryProject/staticfiles/
+
+# Environment variables
+.env
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing/coverage
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
