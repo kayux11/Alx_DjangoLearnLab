@@ -1,10 +1,10 @@
-from django.shortcuts import render
-from .models import Book
-from .models import Library   # ✅ checker requirement
-from django.views.generic.detail import DetailView   # ✅ exact checker import
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm   # ✅ add this as a separate line
 from django.contrib.auth import login, logout
+from .models import Book, Library
+from django.views.generic.detail import DetailView
+
 
 
 # Function-based view: List all books
