@@ -77,8 +77,8 @@ def librarian_view(request):
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
 
-# Add a Book (requires can_add_book permission)
-@permission_required('relationship_app.can_add_book')
+# Add a Book (requires canaddbook permission)
+@permission_required('relationship_app.canaddbook')
 def add_book(request):
     if request.method == 'POST':
         form = BookForm(request.POST)
@@ -89,8 +89,8 @@ def add_book(request):
         form = BookForm()
     return render(request, 'relationship_app/add_book.html', {'form': form})
 
-# Edit a Book (requires can_change_book permission)
-@permission_required('relationship_app.can_change_book')
+# Edit a Book (requires canchangebook permission)
+@permission_required('relationship_app.canchangebook')
 def edit_book(request, pk):
     book = Book.objects.get(pk=pk)
     if request.method == 'POST':
@@ -102,8 +102,8 @@ def edit_book(request, pk):
         form = BookForm(instance=book)
     return render(request, 'relationship_app/edit_book.html', {'form': form, 'book': book})
 
-# Delete a Book (requires can_delete_book permission)
-@permission_required('relationship_app.can_delete_book')
+# Delete a Book (requires candeletebook permission)
+@permission_required('relationship_app.candeletebook')
 def delete_book(request, pk):
     book = Book.objects.get(pk=pk)
     if request.method == 'POST':
