@@ -20,4 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('relationship/', include('relationship_app.urls')),
+
+    # Redirect the root URL to the books list
+    path('', include('relationship_app.urls')),  # now "/" will go to list_books
 ]

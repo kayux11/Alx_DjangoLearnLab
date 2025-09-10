@@ -1,7 +1,11 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView, LogoutView
 from . import views
-from .views import admin_view, librarian_view, member_view, add_book, edit_book, delete_book
+from .views import admin_view
+from .views import librarian_view
+from .views import member_view
+from .views import add_book
+from .views import edit_book
+from .views import delete_book
 
 urlpatterns = [
     path('', views.list_books, name='home'),
@@ -19,6 +23,7 @@ urlpatterns = [
     path('member-view/', member_view, name='member_view'),
 
     # Book CRUD URLs (all in same list)
-    path('add_book/', add_book, name='add_book'),
-    path('edit_book/<int:pk>/', edit_book, name='edit_book'),
-    path('delete_book/<int:pk>/', delete_book, name='delete_book'),
+        path('add_book/', add_book, name='add_book'),
+        path('edit_book/<int:pk>/', edit_book, name='edit_book'),
+        path('delete_book/<int:pk>/', delete_book, name='delete_book'),
+    ]
