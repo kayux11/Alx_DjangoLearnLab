@@ -1,12 +1,19 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import Book, Project, UserProfile
 
-@admin.register(CustomUser)
-class CustomUserAdmin(UserAdmin):
-    # Add any custom admin configurations here
-    list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff']
-    # Keep the default UserAdmin fieldsets and add custom fields if needed
-    fieldsets = UserAdmin.fieldsets + (
-        ('Custom Fields', {'fields': ('phone_number', 'date_of_birth')}),
-    )
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+    list_display = ["title", "user", "published_at"]
+    search_fields = ["title", "user__username"]
+    list_filter = ["published_at"]
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ["name"]
+    filter_horizontal = ["members"]
+    search_fields = ["name", "members__username"]
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ["user", "website"]
+    search_fields = ["user__username", "website"]
