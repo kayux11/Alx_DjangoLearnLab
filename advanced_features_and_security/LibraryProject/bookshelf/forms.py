@@ -1,13 +1,15 @@
+# LibraryProject/bookshelf/forms.py
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
+from .models import Book
 
-class CustomUserCreationForm(UserCreationForm):
+class ExampleForm(forms.ModelForm):
     class Meta:
-        model = CustomUser
-        fields = ('username', 'email', 'phone_number')
+        model = Book
+        fields = ['title', 'author', 'publication_year']  # Adjust these fields as per your model
 
-class CustomUserChangeForm(UserChangeForm):
-    class Meta:
-        model = CustomUser
-        fields = ('username', 'email', 'phone_number')
+    # You can add custom validation here if needed
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if len(title) < 5:
+            raise forms.ValidationError("Title must be at least 5 characters long.")
+        return title

@@ -1,19 +1,37 @@
 from django.contrib import admin
-from .models import Book, Project, UserProfile
+from .models import Book
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+# Register your models here.
 
-@admin.register(Book)
+
 class BookAdmin(admin.ModelAdmin):
-    list_display = ["title", "user", "published_at"]
-    search_fields = ["title", "user__username"]
-    list_filter = ["published_at"]
+    list_display = ('title', 'author', 'publication_year')
+    search_fields = ('title', 'author')
+    list_filter = ('publication_year',)
 
-@admin.register(Project)
-class ProjectAdmin(admin.ModelAdmin):
-    list_display = ["name"]
-    filter_horizontal = ["members"]
-    search_fields = ["name", "members__username"]
+admin.site.register(Book, BookAdmin)
 
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ["user", "website"]
-    search_fields = ["user__username", "website"]
+class CustomUserAdmin(UserAdmin):
+    # Fields to show in the list view
+    list_display = ('email', 'username', 'is_staff', 'is_active')
+    search_fields = ('email', 'username')
+    ordering = ('email',)
+
+    # Fields to display in the admin form
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Personal Info', {'fields': ('username', 'date_of_birth', 'profile_photo')}),
+        ('Permissions', {'fields': ('is_staff', 'is_active', 'is_superuser')}),
+    )
+
+    # Fields to use when creating a new user
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'username', 'password1', 'password2', 'is_staff', 'is_active'),
+        }),
+    )
+
+# Register the CustomUser model with this admin setup
+admin.site.register(CustomUser, CustomUserAdmin)
