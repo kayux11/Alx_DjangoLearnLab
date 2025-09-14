@@ -1,9 +1,13 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class Book(models.Model):
-    title = models.CharField(max_length=200)
-    author = models.CharField(max_length=100)
-    publication_year = models.IntegerField()
-
+class CustomUser(AbstractUser):
+    # Add any custom fields here
+    phone_number = models.CharField(max_length=15, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    
+    class Meta:
+        db_table = 'auth_user'  # Optional: keeps the same table name
+    
     def __str__(self):
-        return f"{self.title} by {self.author} ({self.publication_year})"
+        return self.username

@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .models import Book, Library
+from bookshelf.models import Book, Library  # ✅ import from bookshelf
+from .models import Author, UserProfile
+
 
 
 def book_list(request):
